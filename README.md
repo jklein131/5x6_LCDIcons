@@ -38,7 +38,26 @@ const byte networkdownload[8] = {
   B10001,             //█   █
   B11111,             //█████
 };
-byte networkcheck[] = {
+const byte networkimport[] = {
+  B10000,             //█
+  B01001,             // █  █
+  B00101,             //  █ █
+  B00011,             //   ██
+  B01111,             // ████
+  B00000,             //
+  B10001,             //█   █             
+  B11111              //█████
+};
+const byte networkexport[] = {
+  B01111,             // ████
+  B00011,             //   ██
+  B00101,             //  █ █
+  B01001,             // █  █
+  B10000,             //█                         
+  B00000,             //             
+  B10001,             //█   █
+  B11111              //█████
+const byte networkcheck[] = {
   B00000,             //
   B00000,             //
   B00000,             //
@@ -48,7 +67,7 @@ byte networkcheck[] = {
   B10001,             //█   █
   B11111              //█████
 };
-byte refresh[] = {
+const byte refresh[] = {
   B00010,             //   █
   B11111,             //█████
   B10010,             //█  █
@@ -261,6 +280,16 @@ const byte heart[] = {
   B00100,             //  █
   B00000              //
 };
+const byte flash[] = {
+  B00001,             //    █
+  B00010,             //   █
+  B00100,             //  █
+  B01000,             // █
+  B11110,             //████
+  B00010,             //   █
+  B00100,             //  █
+  B01000              // █
+};
 const byte paperclip[] = {
   B01110,             // ███
   B10000,             //█   
@@ -319,6 +348,16 @@ const byte back[] = {
   B10010,             //█  █
   B10100,             //█ █
   B10000,             //█
+  B11111              //█████
+};
+cont byte newwindow[] = {
+  B00111,             //  ███
+  B00011,             //   ██
+  B10101,             //█ █ █
+  B10000,             //█
+  B10001,             //█   █
+  B10001,             //█   █
+  B10001,             //█   █
   B11111              //█████
 };
 const byte arrowup[] = {
