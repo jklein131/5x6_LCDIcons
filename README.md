@@ -239,7 +239,7 @@ const byte yen[] = {
   B00100,             //  █
   B00100              //  █
 };
-byte pound[] = {
+const byte pound[] = {
   B00110,             //  ██
   B01001,             // █  █
   B01000,             // █
@@ -350,7 +350,7 @@ const byte filewarning[] = {
   B10001,             //█   █
   B11111              //█████
 }; 
-byte sdcard[] = {
+const byte sdcard[] = {
   B11110,             //████
   B10101,             //█ █ █
   B10101,             //█ █ █
@@ -360,7 +360,7 @@ byte sdcard[] = {
   B11111,             //█████
   B11111              //█████
 };
-byte floppydisk[] = {
+const byte floppydisk[] = {
   B11110,             //████
   B10011,             //█  ██
   B10001,             //█   █
