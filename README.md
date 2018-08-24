@@ -1,5 +1,5 @@
 # 5x6_LCDIcons
-5 by 6 
+5 by 6 icons for arduino LCD displays
 ```
 //designed on https://maxpromer.github.io/LCD-Character-Creator/ 
 const byte valve[8] = {
