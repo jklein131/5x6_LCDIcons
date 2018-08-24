@@ -170,7 +170,7 @@ const byte bell[] = {
   B00100,             //  █
   B00000              //
 };
-byte bookmark[] = {
+const byte bookmark[] = {
   B11111,             //█████
   B11111,             //█████
   B11111,             //█████
@@ -180,7 +180,7 @@ byte bookmark[] = {
   B11011,             //██ ██
   B10001              //█   █
 };     
-byte whitebookmark[] = {
+const byte whitebookmark[] = {
   B11111,             //█████
   B11111,             //█   █
   B11111,             //█   █
@@ -191,7 +191,7 @@ byte whitebookmark[] = {
   B10001              //█   █
 };   
 
-byte file[] = {
+const byte file[] = {
   B01111,             // ████
   B10001,             //█   █
   B10001,             //█   █
@@ -200,5 +200,15 @@ byte file[] = {
   B10001,             //█   █
   B10001,             //█   █
   B11111              //█████
-};   
+}; 
+const byte heart[] = {
+  B00000,             //
+  B01010,             // █ █
+  B11111,             //█████
+  B11111,             //█████
+  B01110,             // ███
+  B01110,             // ███
+  B00100,             //  █
+  B00000              //
+};
 ```
