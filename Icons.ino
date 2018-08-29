@@ -54,6 +54,7 @@ const byte networkexport[] = {
   B00000,             //             
   B10001,             //█   █
   B11111              //█████
+};
 const byte networkcheck[] = {
   B00000,             //
   B00000,             //
@@ -457,7 +458,7 @@ const byte back[] = {
   B10000,             //█
   B11111              //█████
 };
-cont byte newwindow[] = {
+const byte newwindow[] = {
   B00111,             //  ███
   B00011,             //   ██
   B10101,             //█ █ █
@@ -519,12 +520,19 @@ const byte magnet[] = {
 };
 
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include <hd44780.h>
+#include <hd44780ioClass/hd44780_I2Cexp.h> // i2c expander i/o class header
 
 // Set the LCD address to 0x27 in PCF8574 by NXP and Set to 0x3F in PCF8574A by Ti
-LiquidCrystal_I2C lcd(0x3F, 16, 2);
+//lcd info 
+const int LCD_ROWS = 2;
+const int LCD_COLS = 16;
+const char * lcdnull = "                "; //16 spaces
+hd44780_I2Cexp lcd[16]; // auto locate & configure up to 16 displays
+int NumLcd;		// number of LCD displays found.
 
-const char x[] = {valve,
+//bytes
+const byte * x[] = {valve,
             flow,
             networkupload,
             networkdownload,
@@ -576,10 +584,44 @@ const char x[] = {valve,
             arrowright,
             arrowleft,
             magnet
-            }
-            
+            };
+void startLCD() {
+  /*
+	 * Locate all the displays by attempting to intialize each one
+	 */
+	for(NumLcd = 0; NumLcd < 16; NumLcd++)
+	{
+		/*
+		 * If begin fails, then assume we have no more displays
+		 */
+		if(lcd[NumLcd].begin(LCD_ROWS, LCD_COLS) != 0)
+			break;
+	}
+	if(NumLcd == 0)
+	{
+		// no LCD devices found, blink the onboard LED if possible
+
+		Serial.println("error no LCD");
+	}
+
+	for(int n = 0; n < NumLcd; n++)
+	{
+
+		/*
+		 * Label the display with its instance number
+		 * and i2c address
+		 */
+		lcd[n].setCursor(0, 0);
+		lcd[n].print("LCD:");
+		lcd[n].print(n);
+
+		lcd[n].print(" (0x");
+		lcd[n].print(lcd[n].getProp(hd44780_I2Cexp::Prop_addr), HEX);
+		lcd[n].print(")");
+	}
+}  
 void setup() {
-  lcd.begin();
+  startLCD();
   
   
 
@@ -588,12 +630,21 @@ void setup() {
 
 void loop() {
   int i = 0;
-  for(;i < strlen(x); i++) {
-      lcd.createChar(0, x[i]);
-      lcd.write(0);
-      delay(100);
+  int chari = 0; 
+  for(i=0;i < sizeof(x); i++) {
+      for(int n = 0; n < NumLcd; n++)
+    	{
+          lcd[n].createChar(chari, x[i]);
+          lcd[n].write(chari);
+    	}
+      chari++;
+      if(chari == 8) {
+        chari =0;
+      }
+      
+      delay(500);
       if(i%16 == 0) {
-          lcd.home(); 
+          lcd[0].home(); 
       }
   }
 }
